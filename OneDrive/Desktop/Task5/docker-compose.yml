@@ -1,0 +1,19 @@
+version: '3'
+services:
+  redis:
+    image: redis
+    container_name: redis-container
+    networks:
+      - flask-redis-network
+  flask:
+    build: .
+    container_name: flask-container
+    ports:
+      - "5000:5000"
+    environment:
+      - REDIS_HOST=redis
+    networks:
+      - flask-redis-network
+
+networks:
+  flask-redis-network:

@@ -1,0 +1,17 @@
+# Use an official Python runtime as a base image
+FROM python:3.9-slim AS builder
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy files to the container
+COPY . .
+
+# Install dependencies
+RUN pip install -r requirements.txt
+
+# Set environment variable for Redis
+ENV REDIS_HOST=redis-container
+
+# Run the application
+CMD ["python", "app.py"]
